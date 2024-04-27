@@ -1,0 +1,46 @@
+﻿@using ApplicationCore.Entities
+@model List<Harcama>
+<div class="p-2 my-3 bg-info bg-gradient text-white justify-content-center d-flex align-items-center">
+    <h4>Bekleyen Harcamalar</h4>
+</div>
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th>Personel</th>
+            <th>Harcama Türü</th>
+            <th>Harcama Tutarı</th>
+            <th>Para Birimi</th>            
+            <th>Talep Tarihi</th>            
+            <th>Dosya</th>
+            <th></th>            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var harcama in Model)
+        {
+            <tr>
+                <td>@harcama.ApplicationUser.Ad @harcama.ApplicationUser.Ad2 @harcama.ApplicationUser.Soyad @harcama.ApplicationUser.Soyad2</td>
+                <td>@harcama.Tur</td>
+                <td>@harcama.Tutar</td>
+                <td>@harcama.ParaBirimi</td>                
+                <td>@harcama.TalepTarihi.ToShortDateString()</td>                
+                <td><a href="~/upload-files/personel/@harcama.Dosya">Görüntülemek için tıklayınız</a></td>
+                <td>
+                    <a href="@Url.Action("HarcamaOnay", "SirketYoneticisi", new { id = harcama.Id })" class="btn btn-success">Onayla</a>
+                    <a href="@Url.Action("HarcamaRed", "SirketYoneticisi", new { id = harcama.Id })" class="btn btn-danger">Reddet</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div aria-label="Page navigation example" class="d-flex justify-content-center">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link @(ViewBag.PageNumber == 1 ? "disabled" : "")" href="@Url.Action("BekleyenHarcamalar", new { page = ViewBag.PageNumber - 1 })">Önceki</a></li>
+
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <li class="page-item"><a class="page-link" href="@Url.Action("BekleyenHarcamalar", new { page = i })">@i </a></li>
+        }
+        <li class="page-item"><a class="page-link @(ViewBag.PageNumber == ViewBag.TotalPages ? "disabled" : ViewBag.TotalPages == 0 ? "disabled" : "")" href="@Url.Action("BekleyenHarcamalar", new { page = ViewBag.PageNumber + 1 })">Sonraki</a></li>
+    </ul>
+</div>

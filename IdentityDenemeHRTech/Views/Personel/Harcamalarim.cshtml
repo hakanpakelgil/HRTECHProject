@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ApplicationCore.Entities.Harcama>
+@{
+    ViewData["Title"] = "Harcamalarım";
+    ViewData["Baslik"] = "Harcamalarım";
+}
+
+<a asp-action="HarcamaEkle" class="btn btn-primary mt-2">Harcama Ekle</a>
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th>Harcama Türü</th>
+            <th>Harcama Tutarı</th>
+            <th>Para Birimi</th>
+            <th>Onay Durumu</th>
+            <th>Talep Tarihi</th>
+            <th>Cevap Tarihi</th>
+            <th>Dosya</th>
+            <th>Düzenle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var harcama in Model)
+        {
+            <tr>
+                <td>@harcama.Tur</td>
+                <td>@harcama.Tutar</td>
+                <td>@harcama.ParaBirimi</td>
+                <td>@harcama.Durum</td>
+                <td>@harcama.TalepTarihi</td>
+                <td>@harcama.CevapTarihi</td>
+                <td><a href="~/upload-files/personel/@harcama.Dosya">@harcama.Dosya</a></td>
+                <td>
+                    <a asp-action="Duzenle"
+                       class="btn @(harcama.Durum == ApplicationCore.Enums.IzinDurumu.Bekleme ? "btn-warning" : "btn-warning disabled")"
+                       asp-route-id="@harcama.Id"
+                       style="pointer-events: @(harcama.Durum != ApplicationCore.Enums.IzinDurumu.Bekleme ? "none" : "auto")">Düzenle</a>
+                </td>
+                <td>
+                    <a asp-action="Sil"
+                       class="btn btn-danger @(harcama.Durum == ApplicationCore.Enums.IzinDurumu.Bekleme ? "" : "disabled")"
+                       asp-route-id="@harcama.Id"
+                       style="pointer-events: @(harcama.Durum == ApplicationCore.Enums.IzinDurumu.Bekleme ? "auto" : "none")">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div aria-label="Page navigation example" class="d-flex justify-content-center">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link @(ViewBag.PageNumber == 1 ? "disabled" : "")" href="@Url.Action("Harcamalarim", new { page = ViewBag.PageNumber - 1 })">Önceki</a></li>
+
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <li class="page-item"><a class="page-link" href="@Url.Action("Harcamalarim", new { page = i })">@i </a></li>
+        }
+        <li class="page-item"><a class="page-link @(ViewBag.PageNumber == ViewBag.TotalPages ? "disabled" : ViewBag.TotalPages == 0 ? "disabled" : "")" href="@Url.Action("Harcamalarim", new { page = ViewBag.PageNumber + 1 })">Sonraki</a></li>
+    </ul>
+</div>

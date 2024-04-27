@@ -1,0 +1,44 @@
+﻿@using ApplicationCore.Entities
+@using ApplicationCore.Enums
+@model YeniHarcamaViewModel
+
+@{
+    ViewData["Title"] = "Personel Harcama Talebi Oluşturma";
+    ViewData["Baslik"] = "Personel Harcama Talebi Oluşturma";
+}
+
+
+@if (ViewBag.Validasyon != null)
+{
+    <div class="alert alert-danger">Lütfen Alanları Düzgün ve Eksiksiz Doldurunuz.</div>    
+}
+@* <h2 class="row text-center d-flex justify-content-center border border-info rounded m-5 p-3" style="background-color:dodgerblue;color:white">@ViewData["Title"]</h2> *@
+
+<form enctype="multipart/form-data" method="post">
+    <div class="border border-info rounded p-3 m-5" @* style="background-color:dodgerblue;color:white" *@>
+    <div class="mb-3">
+        <label class="form-label">Harcama Türü</label>
+        <select asp-for="Tur" asp-items="Html.GetEnumSelectList<HarcamaTuru>()" class="form-control">
+        <option value="">--Seçiniz--</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Harcama Tutarı</label>
+        <input asp-for="Tutar" type="text" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Para Birimi</label>
+        <select asp-for="ParaBirimi" asp-items="Html.GetEnumSelectList<ParaBirimi>()" class="form-control">
+                <option value="">--Seçiniz--</option>
+        </select>
+    </div>
+    <div>
+        <label class="form-label">Dosya Yükle</label>
+        <input type="file" class="form-control" asp-for="Dosya">    
+    </div>
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-success mt-4">Harcama Talep Et</button>
+            <a class="btn btn-danger mt-4 ms-2" asp-action="Harcamalarim">İptal</a>
+    </div>
+    </div>
+</form>

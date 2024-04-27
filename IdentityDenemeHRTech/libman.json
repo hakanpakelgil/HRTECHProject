@@ -1,0 +1,122 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "font-awesome@6.5.1",
+      "destination": "wwwroot/font-awesome/",
+      "files": [
+        "css/all.min.css",
+        "webfonts/fa-brands-400.ttf",
+        "webfonts/fa-brands-400.woff2",
+        "webfonts/fa-regular-400.ttf",
+        "webfonts/fa-regular-400.woff2",
+        "webfonts/fa-solid-900.ttf",
+        "webfonts/fa-solid-900.woff2",
+        "webfonts/fa-v4compatibility.ttf",
+        "webfonts/fa-v4compatibility.woff2"
+      ]
+    },
+    {
+      "library": "aos@2.3.4",
+      "destination": "wwwroot/assets/aos/"
+    },
+    {
+      "library": "bootstrap@5.3.3",
+      "destination": "wwwroot/assets/bootstrap/"
+    },
+    {
+      "library": "bootstrap-icons@1.11.3",
+      "destination": "wwwroot/assets/bootstrap-icons/",
+      "files": [
+        "bootstrap-icons.svg",
+        "font/fonts/bootstrap-icons.woff",
+        "font/fonts/bootstrap-icons.woff2"
+      ]
+    },
+    {
+      "library": "boxicons@2.1.4",
+      "destination": "wwwroot/assets/boxicons/",
+      "files": [
+        "fonts/boxicons.ttf"
+      ]
+    },
+    {
+      "library": "popper.js@2.11.8",
+      "destination": "wwwroot/lib/popper.js/",
+      "files": [
+        "umd/popper.min.js",
+        "umd/popper.min.js.map"
+      ]
+    },
+    {
+      "library": "jQuery-slimScroll@1.3.8",
+      "destination": "wwwroot/lib/jQuery-slimScroll/",
+      "files": [
+        "jquery.slimscroll.min.js"
+      ]
+    },
+    {
+      "library": "morris.js@0.5.1",
+      "destination": "wwwroot/lib/morris.js/"
+    },
+    {
+      "library": "raphael@2.3.0",
+      "destination": "wwwroot/lib/raphael/",
+      "files": [
+        "raphael.min.js"
+      ]
+    },
+    {
+      "library": "Chart.js@4.4.1",
+      "destination": "wwwroot/lib/Chart.js/",
+      "files": [
+        "chart.js"
+      ]
+    },
+    {
+      "library": "line-awesome@1.3.0",
+      "destination": "wwwroot/lib/line-awesome/",
+      "files": [
+        "line-awesome/css/line-awesome.css",
+        "line-awesome/css/line-awesome.min.css",
+        "line-awesome/fonts/la-brands-400.eot",
+        "line-awesome/fonts/la-brands-400.svg",
+        "line-awesome/fonts/la-brands-400.ttf",
+        "line-awesome/fonts/la-brands-400.woff",
+        "line-awesome/fonts/la-brands-400.woff2",
+        "line-awesome/fonts/la-regular-400.eot",
+        "line-awesome/fonts/la-regular-400.svg",
+        "line-awesome/fonts/la-regular-400.ttf",
+        "line-awesome/fonts/la-regular-400.woff",
+        "line-awesome/fonts/la-regular-400.woff2",
+        "line-awesome/fonts/la-solid-900.eot",
+        "line-awesome/fonts/la-solid-900.svg",
+        "line-awesome/fonts/la-solid-900.ttf",
+        "line-awesome/fonts/la-solid-900.woff",
+        "line-awesome/fonts/la-solid-900.woff2",
+        "line-awesome/scss/line-awesome.scss",
+        "line-awesome/scss/_bordered_pulled.scss",
+        "line-awesome/scss/_core.scss",
+        "line-awesome/scss/_fixed-width.scss",
+        "line-awesome/scss/_icons.scss",
+        "line-awesome/scss/_larger.scss",
+        "line-awesome/scss/_list.scss",
+        "line-awesome/scss/_mixins.scss",
+        "line-awesome/scss/_path.scss",
+        "line-awesome/scss/_rotated-flipped.scss",
+        "line-awesome/scss/_screen-reader.scss",
+        "line-awesome/scss/_stacked.scss",
+        "line-awesome/scss/_variables.scss"
+      ]
+    },
+    {
+      "library": "glightbox@3.3.0",
+      "destination": "wwwroot/assets/glightbox/"
+    },
+    {
+      "library": "Swiper@11.0.5",
+      "destination": "wwwroot/assets/Swiper/"
+    }
+  ]
+}

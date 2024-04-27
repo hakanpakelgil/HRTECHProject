@@ -1,0 +1,91 @@
+﻿@using ApplicationCore.Entities
+@model List<Izin>
+
+@{
+    ViewData["Title"] = "Yönetici Avans Paneli";
+}
+
+<div class="container">
+    <div class="row">
+        <div>
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <div class="p-2 my-3 bg-info bg-gradient text-white justify-content-center d-flex align-items-center">
+                            <h4>Onaylanan İzinler</h4>
+                        </div>
+                        <table class="table table-primary table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Personel
+                                    </th>
+                                    <th>
+                                        İzin Türü
+                                    </th>
+                                    <th>
+                                        Başlangıç Tarihi
+                                    </th>
+                                    <th>
+                                        Bitiş Tarihi
+                                    </th>
+                                    <th>
+                                        Gün Sayısı
+                                    </th>
+                                    <th>
+                                        Cevaplanma Tarihi
+                                    </th>                                    
+                                    <th>
+
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var izin in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @izin.User.Ad @izin.User.Ad2 @izin.User.Soyad @izin.User.Soyad2
+                                        </td>
+                                        <td>
+                                            @izin.Turu
+                                        </td>
+                                        <td>
+                                            @izin.BaslangicTarihi.ToShortDateString()
+                                        </td>
+                                        <td>
+                                            @izin.BitisTarihi.ToShortDateString()
+                                        </td>
+                                        <td>
+                                            @izin.GunSayisi
+                                        </td>
+                                        <td>
+                                            @if (izin.CevaplanmaTarihi.HasValue)
+                                            @izin.CevaplanmaTarihi.Value.ToShortDateString()
+                                        </td>                                     
+                                        <td>
+                                            <a href="@Url.Action("IzinBekleme", "SirketYoneticisi", new { id = izin.Id, sender = "onay" })" class="btn btn-warning">Beklemeye Al</a>
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div aria-label="Page navigation example" class="d-flex justify-content-center">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link @(ViewBag.PageNumber == 1 ? "disabled" : "")" href="@Url.Action("OnaylananIzinler", new { page = ViewBag.PageNumber - 1 })">Önceki</a></li>
+
+                                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                                {
+                                    <li class="page-item"><a class="page-link" href="@Url.Action("OnaylananIzinler", new { page = i })">@i </a></li>
+                                }
+                                <li class="page-item"><a class="page-link @(ViewBag.PageNumber == ViewBag.TotalPages ? "disabled" : ViewBag.TotalPages == 0 ? "disabled" : "")" href="@Url.Action("OnaylananIzinler", new { page = ViewBag.PageNumber + 1 })">Sonraki</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,137 @@
+﻿@model PersonelGuncellemeViewModel
+
+@{
+    ViewData["Title"] = "Personel Bilgi Düzenleme";
+    ViewData["Baslik"] = "Personel Bilgi Düzenle";
+}
+
+
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <div class="container py-3">
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img src="~/img/personel/@Model.FotografYolu" alt="avatar"
+                                 class="rounded-circle img-fluid mb-3" style="width: 150px;">
+
+                            <div>
+                                <input type="file" class="form-control" id="Fotograf" name="Fotograf">
+                                <span asp-validation-for="Fotograf" class="text-danger"></span>
+
+                            </div>
+
+
+                            <h5 class="my-3">@Model.Ad @Model.Soyad</h5>
+
+                            <div class="d-flex justify-content-center mb-2">
+                                <button type="submit" class="btn btn-primary mx-2">Bilgileri Kaydet</button>
+                                <a asp-controller="Personel" asp-action="Details" type="button" class="btn btn-danger">Kaydetmeden Çık</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-body">
+
+
+                            @*  <div class="row">
+                            <div class="col-sm-3">
+                            <p class="mb-0">Ad Soyad</p>
+                            </div>
+                            <div class="col-sm-9">
+                            <p class="text-muted mb-0">@Model.Ad @Model.Soyad</p>
+                            </div>
+                            </div>
+                            <hr> *@
+
+
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Telefon:</p>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" id="Telefon" name="Telefon" value="@Model.Telefon">
+                                    <span asp-validation-for="Telefon" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">İl:</p>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" id="Il" name="Il" value="@Model.Il">
+                                    <span asp-validation-for="Il" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">İlçe:</p>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" id="Ilce" name="Ilce" value="@Model.Ilce">
+                                    <span asp-validation-for="Ilce" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Mahalle:</p>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" id="Mahalle" name="Mahalle" value="@Model.Mahalle">
+                                    <span asp-validation-for="Mahalle" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Cadde/Sokak:</p>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" id="Sokak" name="Sokak" value="@Model.Sokak">
+                                    <span asp-validation-for="Sokak" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Kapı No:</p>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" id="KapiNo" name="KapiNo" value="@Model.KapiNo">
+                                    <span asp-validation-for="KapiNo" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Daire No:</p>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" id="DaireNo" name="DaireNo" value="@Model.DaireNo">
+                                    <span asp-validation-for="DaireNo" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        </div>
+    </form>

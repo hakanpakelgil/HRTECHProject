@@ -1,0 +1,185 @@
+﻿@using ApplicationCore.Entities
+@using HRTechProject.Entities
+@using Infrastructure.Data
+@using Microsoft.AspNetCore.Identity
+@model ApplicationUser
+ 
+@{
+    ViewData["Title"] = "Personel Detay";
+    ViewData["Baslik"] = "Personel Detayları";
+
+}
+
+@* <h2 class="row text-center d-flex justify-content-center mb-3">Personel Detayları</h2> *@
+
+@if (ViewBag.GuncelleMesaji != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.GuncelleMesaji
+    </div>
+}
+
+<div class="container py-3">
+
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="~/img/personel/@Model.FotografYolu" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">@Model.Ad @Model.Soyad</h5>
+                        <p class="text-muted mb-3">@Model.Meslek.Ad</p>
+                        <div class="d-flex justify-content-center mb-2">
+                            <a asp-controller="Personel" asp-action="Edit" type="button" class="btn btn-primary">Bilgileri Düzenle</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Ad Soyad:</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Model.Ad @Model.Soyad</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">TC Kimlik No:</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Model.TcNo</p>
+                            </div>
+                        </div>
+                        <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Net İzin Gün Sayısı:</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">@ViewBag.IzinGunSayisi</p>
+                        </div>
+                    </div>
+                    <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Cinsiyet:</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Model.Cinsiyet</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Doğum Tarihi:</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@(Model.DogumTarihi.HasValue ? Model.DogumTarihi.Value.ToShortDateString() : "Bilinmiyor")</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">E-mail:</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Model.Email</p>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Telefon:</p>
+                            </div>
+                            <div class="col-sm-9">
+                                @* TODO: Telefon numarası formatı düzenlenecek. Az girilirse hata veriyor. *@
+                               @*  <p class="text-muted mb-0">0 (@Model.Telefon.Substring(0,3)) @Model.Telefon.Substring(3,3) @Model.Telefon.Substring(6,2) @Model.Telefon.Substring(8,2)</p> *@
+                              <p class="text-muted mb-0">@Model.Telefon</p> 
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Adres:</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Model.Adres.Mahalle Mah. @Model.Adres.Sokak Cad/Sok. No:@Model.Adres.KapiNo/@Model.Adres.DaireNo @Model.Adres.Ilce/@Model.Adres.Il</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                
+
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Meslek:</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Model.Meslek.Ad</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Departman:</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Model.Departman.Ad</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Maaş:</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@(Model.Maas.HasValue ? Model.Maas.Value.ToString("C2") : "Bilinmiyor")</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">İşe Giriş Tarihi:</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Model.IseGirisTarihi?.ToShortDateString()</p>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">İşten Çıkış Tarihi:</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Model.IstenCikisTarihi?.ToShortDateString()</p>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>

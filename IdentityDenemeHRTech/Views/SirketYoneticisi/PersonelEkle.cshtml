@@ -1,0 +1,150 @@
+﻿@model PersonelEkleViewModel
+
+<h2>Personel Ekle</h2>
+
+@if (ViewData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewData["ErrorMessage"]
+    </div>
+}
+
+<div>
+    @foreach (var error in ViewData.ModelState.Values.SelectMany(x => x.Errors))
+    {
+        <div class="text-danger">@error.ErrorMessage</div>
+    }
+</div>
+
+<form asp-controller="SirketYoneticisi" asp-action="PersonelEkle" method="post" enctype="multipart/form-data">
+
+    <div>
+        <label asp-for="Fotograf">Fotoğraf Ekle</label>
+        <input type="file" class="form-control" asp-for="Fotograf">
+        <span asp-validation-for="Fotograf" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Ad">Ad</label>
+        <input asp-for="Ad" class="form-control" />
+        <span asp-validation-for="Ad" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Soyad">Soyad</label>
+        <input asp-for="Soyad" class="form-control" />
+        <span asp-validation-for="Soyad" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TC">TC</label>
+        <input asp-for="TC" class="form-control" />
+        <span asp-validation-for="Soyad" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Sifre">Sifre</label>
+        <input asp-for="Sifre" class="form-control" />
+        <span asp-validation-for="Sifre" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Maas">Maaş</label>
+        <input asp-for="Maas" type="number" class="form-control" />
+        <span asp-validation-for="Maas" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Mail">Mail</label>
+        <input asp-for="Mail" class="form-control" />
+        <span asp-validation-for="Mail" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Telefon">Telefon</label>
+        <input asp-for="Telefon" type="tel" class="form-control" />
+        <span asp-validation-for="Telefon" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IseGirisTarihi">İşe Giriş Tarihi</label>
+        <input asp-for="IseGirisTarihi" type="date" class="form-control" />
+        <span asp-validation-for="IseGirisTarihi" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DogumTarihi">Doğum Tarihi</label>
+        <input asp-for="DogumTarihi" type="date" class="form-control" />
+        <span asp-validation-for="DogumTarihi" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SirketAdi">Şirket</label>
+        <select asp-for="SirketAdi" asp-items="Model.Sirketler.Select(x => new SelectListItem(x.Name, x.Name))" class="form-control">
+            <option value="">-- Şirket Seçin --</option>
+        </select>
+        <span asp-validation-for="SirketAdi" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MeslekId">Meslek</label>
+        <select asp-for="MeslekId" class="form-control">
+            <option value="">-- Meslek Seçin --</option>
+            @if (Model.Meslekler != null && Model.Meslekler.Any())
+            {
+                @foreach (var meslek in Model.Meslekler)
+                {
+                    <option value="@meslek.Id">@meslek.Ad</option>
+                }
+            }
+            else
+            {
+                <option value="" disabled selected>Hata. Sayfayı yenileyin.</option>
+            }
+        </select>
+        <span asp-validation-for="MeslekId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DepartmanId">Departman</label>
+        <select asp-for="DepartmanId" asp-items="Model.Departmanlar!.Select(x => new SelectListItem(x.Ad, x.Id.ToString()))" class="form-control">
+            <option value="">-- Departman Seçin --</option>
+        </select>
+        <span asp-validation-for="DepartmanId" class="text-danger"></span>
+    </div>
+
+
+
+    <div class="form-group mb-3">
+        <label asp-for="Cinsiyet">Cinsiyet</label>
+        <select asp-for="Cinsiyet" class="form-control">
+            <option value="Erkek">Erkek</option>
+            <option value="Kadin">Kadın</option>
+        </select>
+        <span asp-validation-for="Cinsiyet" class="text-danger"></span>
+    </div>
+
+    <!-- Adres bilgileri için form alanları -->
+    <div class="form-group">
+        <h3>Adres Bilgileri</h3>
+        <label asp-for="Adres.Il">İl</label>
+        <input asp-for="Adres.Il" class="form-control" />
+        <span asp-validation-for="Adres.Il" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Adres.Ilce">İlçe</label>
+        <input asp-for="Adres.Ilce" class="form-control" />
+        <span asp-validation-for="Adres.Ilce" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Adres.Mahalle">Mahalle</label>
+        <input asp-for="Adres.Mahalle" class="form-control" />
+        <span asp-validation-for="Adres.Mahalle" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Adres.Sokak">Sokak</label>
+        <input asp-for="Adres.Sokak" class="form-control" />
+        <span asp-validation-for="Adres.Sokak" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Adres.KapiNo">Kapı No</label>
+        <input asp-for="Adres.KapiNo" class="form-control" />
+        <span asp-validation-for="Adres.KapiNo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Adres.DaireNo">Daire No</label>
+        <input asp-for="Adres.DaireNo" class="form-control" />
+        <span asp-validation-for="Adres.DaireNo" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ekle</button>
+    <a asp-action="Index" class="btn btn-danger">İptal Et</a>
+</form>

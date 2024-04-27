@@ -1,0 +1,96 @@
+﻿@using ApplicationCore.Entities
+@model List<Avans>
+
+@{
+	ViewData["Title"] = "Personel Avans";	
+}
+
+<div class="container">
+	<div class="row">
+		<div>
+			<div class="card">
+				<div class="card-body">
+					<div class="mt-2 mb-3 rounded">
+						<strong>Kullanıcı Adı:</strong> @User.Identity.Name
+					</div>
+					<div>
+						<div class="p-2 my-3 bg-info bg-gradient text-white justify-content-center d-flex align-items-center">
+							<h4>Avanslar</h4>
+						</div>
+						<table class="table table-primary table-striped">
+							<thead>
+								<tr>
+									<th>
+										Avans Tarihi
+									</th>
+									<th>
+										Avans Türü
+									</th>
+									<th>
+										Tutar
+									</th>
+									<th>
+										Durumu
+									</th>
+									<th>
+										Onaylanma Tarihi
+									</th>
+									<th>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var avans in Model)
+								{
+									<tr>
+										<td>
+											@avans.Tarih.ToShortDateString()
+										</td>
+										<td>
+											@avans.Tur
+										</td>
+										<td>
+											@avans.Tutar
+										</td>
+										<td>
+											@avans.Durum
+										</td>
+										<td>
+											@(avans.OnaylanmaTarihi != null ? avans.OnaylanmaTarihi.Value.ToShortDateString() : (avans.Durum == ApplicationCore.Enums.AvansDurumu.Red ? "" : (avans.Durum == ApplicationCore.Enums.AvansDurumu.Bekleme ? "Onay Bekleniyor" : "")))
+										</td>
+										<td>
+											@if (avans.Durum == ApplicationCore.Enums.AvansDurumu.Bekleme)
+											{
+												<a href="@Url.Action("AvansDuzenle", "Personel", new { id = avans.Id })" class="btn btn-primary">Düzenle</a>
+												<a href="@Url.Action("AvansIptalEt", "Personel", new { id = avans.Id })" class="btn btn-danger">İptal Et</a>
+											}
+											@if (avans.Durum == ApplicationCore.Enums.AvansDurumu.Onay)
+											{
+												<button class="btn btn-success" disabled>Onaylandı</button>										
+											}
+											@if (avans.Durum == ApplicationCore.Enums.AvansDurumu.Red)
+											{
+												<button class="btn btn-danger" disabled>Reddedildi</button>
+											}
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+						<div aria-label="Page navigation example" class="d-flex justify-content-center">
+							<ul class="pagination">
+								<li class="page-item"><a class="page-link @(ViewBag.PageNumber == 1 ? "disabled" : "")" href="@Url.Action("Avans", new { page = ViewBag.PageNumber - 1 })">Önceki</a></li>
+
+								@for (int i = 1; i <= ViewBag.TotalPages; i++)
+								{
+									<li class="page-item"><a class="page-link" href="@Url.Action("Avans", new { page = i })">@i </a></li>
+								}
+								<li class="page-item"><a class="page-link @(ViewBag.PageNumber == ViewBag.TotalPages ? "disabled" : ViewBag.TotalPages == 0 ? "disabled" : "")" href="@Url.Action("Avans", new { page = ViewBag.PageNumber + 1 })">Sonraki</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

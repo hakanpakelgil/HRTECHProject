@@ -1,0 +1,303 @@
+﻿@using HRTechProject.Entities
+
+@{
+	ViewData["Title"] = "Bilgilerim";
+	ViewData["Baslik"] = "Bilgilerim";
+	var kullanici = ViewData["Kullanici"] as ApplicationUser; // kullanıcı bilgilerini controllerdan alıyoruz
+
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<meta name="description" content="HRTech Kontrol Paneli">
+	<title>HRTech Kontrol Paneli - HRTech</title>
+
+
+	<link href="~/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<!-- Fontawesome CSS -->
+    <link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
+	<!-- Lineawesome CSS -->
+	<link href="~/lib/line-awesome/line-awesome/css/line-awesome.css" rel="stylesheet" />
+	<link href="~/lib/line-awesome/line-awesome/css/line-awesome.min.css" rel="stylesheet" />
+	<!-- Main CSS -->
+	<link href="~/css/sirketyoneticisi.css" rel="stylesheet" />
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+
+		<!-- Header -->
+		<div class="header">
+			<!-- Logo -->
+			<div class="header-left">
+				<a asp-action="Index" asp-controller="Home" class="logo">
+					<img src="~/assets/img/logo.png" width="70" height="70" alt="">
+				</a>
+			</div>
+			<!-- /Logo -->
+
+			<a id="toggle_btn" href="javascript:void(0);">
+				<span class="bar-icon">
+					<span></span>
+					<span></span>
+					<span></span>
+				</span>
+			</a>
+
+			<!-- Header Title -->
+			<div class="page-title-box">
+				<h3>HRTech Yönetici Kontrol Paneli</h3>
+			</div>
+			<!-- /Header Title -->
+
+			<a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
+
+			<!-- Header Menu -->
+			<ul class="nav user-menu">
+				<li class="nav-item dropdown has-arrow main-drop">
+					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+						<span class="user-img">
+							<img src="~/img/personel/@kullanici!.FotografYolu" alt="Avatar">
+						</span>
+						<span> @kullanici!.Ad @kullanici.Ad2 @kullanici.Soyad @kullanici.Soyad2 </span>
+					</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item text-decoration-none" asp-controller="Personel" asp-action="Index">Bilgilerim</a>
+						<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+							<button type="submit" class="dropdown-item text-decoration-none">Çıkış</button>
+						</form>
+					</div>
+				</li>
+			</ul>
+			<!-- /Header Menu -->
+			<!-- Mobile Menu -->
+			<div class="dropdown mobile-user-menu">
+				<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+				<div class="dropdown-menu dropdown-menu-right">
+					<a class="dropdown-item text-decoration-none" asp-controller="Personel" asp-action="Index">Bilgilerim</a>
+					<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+						<button type="submit" class="dropdown-item text-decoration-none">Çıkış</button>
+					</form>
+				</div>
+			</div>
+			<!-- /Mobile Menu -->
+
+		</div>			<!-- /Header -->
+		<!-- Sidebar -->
+		<div class="sidebar" id="sidebar">
+			<div class="sidebar-inner slimscroll">
+				<div id="sidebar-menu" class="sidebar-menu">
+					<ul>
+
+						
+						<!-- ÇALIŞANLAR -->
+
+						@* <li class="menu-title">
+							<span>Çalışanlar</span>
+						</li>
+						<li class="submenu">
+							<a href="#" class="noti-dot"><i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<li><a href="employees.php">All Employees</a></li>
+								<li><a href="holidays.php">Holidays</a></li>
+								<li><a href="leaves-employee.php">Employee Leave</a></li>
+								<li><a href="departments.php">Departments</a></li>
+								<li><a href="designations.php">Designations</a></li>
+								<li><a href="timesheet.php">Timesheet</a></li>
+								<li><a href="overtime.php">Overtime</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="clients.php"><i class="la la-users"></i> <span>Clients</span></a>
+						</li>
+						<li class="submenu">
+							<a href="#"><i class="la la-rocket"></i> <span> Projects</span> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<li><a href="projects.php">Projects</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="leads.php"><i class="la la-user-secret"></i> <span>Leads</span></a>
+						</li> *@
+
+
+
+						<!-- HARCAMALAR -->
+
+						<li class="menu-title">
+							<span>HR</span>
+						</li>
+
+						<li class="submenu">
+							<a href="#"><i class="la la-money"></i> <span> Harcamalar </span> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<li><a asp-controller="SirketYoneticisi" asp-action="BekleyenHarcamalar"> Bekleyen Harcamalar </a></li>
+								<li><a asp-controller="SirketYoneticisi" asp-action="OnaylananHarcamalar"> Onaylanan Harcamalar </a></li>
+								<li><a asp-controller="SirketYoneticisi" asp-action="IptalHarcamalar"> İptal Harcamalar </a></li>
+								
+							</ul>
+						</li>
+
+						<li class="submenu">
+							<a href="#"><i class="la la-business-time"></i> <span> İzinler </span> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<li><a asp-controller="SirketYoneticisi" asp-action="BekleyenIzinler"> Bekleyen İzinler </a></li>
+								<li><a asp-controller="SirketYoneticisi" asp-action="OnaylananIzinler"> Onaylanan İzinler </a></li>
+								<li><a asp-controller="SirketYoneticisi" asp-action="RedIzinler"> İptal İzinler </a></li>
+
+							</ul>
+						</li>
+
+						<li class="submenu">
+							<a href="#"><i class="la la-wallet"></i> <span> Avanslar </span> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<li><a asp-controller="SirketYoneticisi" asp-action="BekleyenAvanslar"> Bekleyen Avanslar </a></li>
+								<li><a asp-controller="SirketYoneticisi" asp-action="OnaylananAvanslar"> Onaylanan Avanslar </a></li>
+								<li><a asp-controller="SirketYoneticisi" asp-action="IptalAvanslar"> İptal Avanslar </a></li>
+
+							</ul>
+						</li>
+
+
+						<li class="menu-title">
+							<span>Kullanıcı Yönetimi</span>
+						</li>
+						<li class="submenu">
+							<a href="#"><i class="la la-address-card"></i> <span> Personel </span> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<li><a asp-controller="SirketYoneticisi" asp-action="PersonelEkle"> Personel Ekle </a></li>
+								@* <li><a href="client-profile.php"> Client Profile </a></li> *@
+							</ul>
+						</li>
+
+@* 
+						<li class="submenu">
+							<a href="#"><i class="la la-files-o"></i> <span> Accounts </span> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<li><a href="invoices.php">Invoices</a></li>
+								<li><a href="payments.php">Payments</a></li>
+								<li><a href="expenses.php">Expenses</a></li>
+								<li><a href="provident-fund.php">Provident Fund</a></li>
+								<li><a href="taxes.php">Taxes</a></li>
+							</ul>
+						</li>
+						<li class="submenu">
+							<a href="#"><i class="la la-money"></i> <span> Payroll </span> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<li><a href="salary.php"> Employee Salary </a></li>
+								<li><a href="salary-view.php"> Payslip </a></li>
+								<li><a href="payroll-items.php"> Payroll Items </a></li>
+							</ul>
+						</li>
+
+
+
+						<li class="submenu">
+							<a href="#"><i class="la la-crosshairs"></i> <span> Goals </span> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<li><a href="goal-tracking.php"> Goal List </a></li>
+								<li><a href="goal-type.php"> Goal Type </a></li>
+							</ul>
+						</li>
+						<li class="submenu">
+							<a href="#"><i class="la la-edit"></i> <span> Training </span> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<li><a href="training.php"> Training List </a></li>
+								<li><a href="trainers.php"> Trainers</a></li>
+								<li><a href="training-type.php"> Training Type </a></li>
+							</ul>
+						</li>
+						<li><a href="promotion.php"><i class="la la-bullhorn"></i> <span>Promotion</span></a></li>
+						<li><a href="resignation.php"><i class="la la-external-link-square"></i> <span>Resignation</span></a></li>
+						<li><a href="termination.php"><i class="la la-times-circle"></i> <span>Termination</span></a></li>
+						<li class="menu-title">
+							<span>Administration</span>
+						</li>
+						<li>
+							<a href="assets.php"><i class="la la-object-ungroup"></i> <span>Assets</span></a>
+						</li>
+
+
+
+						<li>
+							<a href="users.php"><i class="la la-user-plus"></i> <span>Users</span></a>
+						</li> *@
+
+						<li class="menu-title">
+							<span>Hesap</span>
+						</li>
+						<li class="submenu">
+							<a href="#"><i class="la la-user"></i> <span> Profilim </span> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+								<li><a asp-controller="SirketYoneticisi" asp-action="Ozet"> Profil Düzenle </a></li>
+								@* <li><a href="client-profile.php"> Client Profile </a></li> *@
+							</ul>
+						</li>
+						@* <li>
+							<a href="settings.php"><i class="la la-cogs"></i> <span>Settings</span></a>
+						</li> *@
+						@* <li>
+
+							<a href="logout.php"><i class="la la-power-off"></i> <span>Çıkış</span></a>
+						</li> *@
+
+					</ul>
+				</div>
+			</div>
+		</div>			<!-- /Sidebar -->
+		<!-- Page Wrapper -->
+		<div class="page-wrapper">
+
+			<!-- Page Content -->
+			@RenderBody()
+			<!-- /Page Content -->
+
+		</div>
+		<!-- /Page Wrapper -->
+
+	</div>
+	<!-- /Main Wrapper -->
+	<!-- javascript links starts here -->
+	<!-- jQuery -->
+	@* <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script> *@
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <script src="~/assets/aos/aos.js"></script>
+    <link href="~/assets/aos/aos.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/@@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
+
+
+	<!-- Bootstrap Core JS -->
+	<script src="~/lib/popper.js/umd/popper.min.js"></script>
+    @* <script src="~/assets/bootstrap/js/bootstrap.min.js"></script> *@
+
+	<!-- Slimscroll JS -->
+    <script src="~/lib/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/assets/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Custom JS -->
+
+	<script type="module" src="~/assets/js/main.js"></script>
+    <script type="module" src="~/js/site.js"></script>
+
+    <script src="~/assets/glightbox/js/glightbox.min.js"></script>
+    <script src="~/assets/glightbox/js/glightbox.js"></script>
+    <link href="~/assets/glightbox/css/glightbox.min.css" rel="stylesheet" />
+    <link href="~/assets/glightbox/css/glightbox.css" rel="stylesheet" />
+	@await Component.InvokeAsync("NToastNotify")
+	
+	<!-- javascript links ends here  -->
+</body>
+</html>
